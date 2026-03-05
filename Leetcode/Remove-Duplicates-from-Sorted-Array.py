@@ -7,11 +7,10 @@
 7        second for unique elements"""
 8
 9        uniq = 0
-10        n = len(nums)
-11
-12        for i in range(1, n):
-13            if nums[i] != nums[uniq]:
-14                uniq += 1 # find the next uniq number
-15            nums[uniq] = nums[i]
-16
-17        return uniq + 1 #index starts at zero; we need count of numbers
+10
+11        for i in range(1, len(nums)):
+12            if (nums[i] != nums[uniq]):
+13                uniq += 1 # find the next uniq number
+14            nums[uniq] = nums[i]
+15
+16        return uniq + 1 #index starts at zero; we need count of numbers
