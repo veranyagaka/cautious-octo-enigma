@@ -3,21 +3,26 @@
 3        max_sum = 0
 4        window_sum = 0
 5        left = 0
-6        window_count = collections.Counter()
+6        seen = set()
 7
 8
 9        for right in range(len(nums)):
-10            window_count[nums[right]] += 1
-11            window_sum += nums[right]
-12
-13            while (right - left + 1) > k or window_count[nums[right]] > 1:
-14                window_count[nums[left]] -= 1
-15                window_sum -= nums[left]
+10            while nums[right] in seen:
+11                seen.remove(nums[left])
+12                window_sum -= nums[left]
+13                left += 1
+14
+15            window_sum += nums[right]
 16
-17                left += 1
-18
-19            if right - left + 1 == k:
-20                max_sum = max(max_sum, window_sum)
-21            
+17            while (right - left + 1) > k :
+18                seen.remove(nums[left])
+19                window_sum -= nums[left]
+20
+21                left += 1
 22
-23        return max_sum
+23            seen.add(nums[right])
+24
+25            if right - left + 1 == k:
+26                max_sum = max(max_sum, window_sum)
+27            
+28        return max_sum
