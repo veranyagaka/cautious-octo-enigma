@@ -28,7 +28,7 @@
 28
 29        for i, n in enumerate(nums):
 30            total += n
-31            r = total & k
+31            r = total % k
 32
 33            if r not in remainder:
 34                remainder[r] = i
