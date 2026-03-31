@@ -1,21 +1,14 @@
 1class Solution:
 2    def reductionOperations(self, nums: List[int]) -> int:
-3        nums.sort()
-4        ops = 0
-5        n = len(nums)
-6        distinct_count = 0
+3        res = 0
+4        steps = 0
+5
+6        nums.sort()
 7
-8        for i in range(1, n):
-9            if nums[i] != nums[i - 1]:
-10                distinct_count += 1
-11
-12            ops += distinct_count
+8        for i in range(1, len(nums)):
+9            if nums[i] > nums[i-1]:
+10                steps += 1
+11            res += steps
+12            # how far each no is from the minimum
 13
-14
-15        return ops
-16
-17        """nums = [5,1,3]
-18        1,3,5
-19
-20
-21        """
+14        return res
