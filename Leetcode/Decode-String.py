@@ -1,27 +1,33 @@
 1class Solution:
 2    def decodeString(self, s: str) -> str:
-3        curr_string = ""
-4        stack = []
-5        curr_num = 0
-6
-7        for c in s:
-8            if c.isdigit():
-9                curr_num = curr_num * 10 + int(c)
-10
-11            elif c == "[":
-12                stack.append((curr_string, curr_num))
-13                curr_string = ""
-14                curr_num = 0
-15
+3
+4        ## using recursion
+5
+6        def decode(i):
+7            k = 0
+8            result = ""
+9
+10            while i[0] < len(s):
+11                ch = s[i[0]]
+12
+13                ## handling multidigits
+14                if ch.isdigit():
+15                    k = k * 10 + int(ch)
 16
-17            elif c == "]":
-18                prev_string, num = stack.pop()
-19                curr_string = prev_string + num * curr_string
-20
-21
-22            else:
-23                curr_string += c
-24
+17                elif ch == "[":
+18                    i[0] += 1
+19                    inner = decode(i)
+20                    result += inner * k
+21                    k = 0 ## reset
+22
+23                elif ch == "]":
+24                    return result
 25
-26
-27        return curr_string
+26                else:
+27                    result += ch
+28
+29                i[0] += 1 # a pointer
+30
+31            return result
+32
+33        return decode([0])
